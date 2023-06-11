@@ -2,7 +2,7 @@
 -- using the Project BLU Database. These queries demonstrate the utilization of complex SQL statements such as 
 -- RANK, LAG, CASE, among others. PostgreSQL has been employed to develop these queries.
 
--- Retrieve the month, product name, sales for the month, and sales ranking for the nth best-selling product 
+-- 1. Retrieve the month, product name, sales for the month, and sales ranking for the nth best-selling product 
 -- for each month in the year 1997.
 
 SELECT *
@@ -23,7 +23,7 @@ WHERE salesformonthranking = n
 ORDER BY month, salesformonthranking, productname
 
 
--- RANK OF PRODUCT SALES ALL TIME
+-- 2. RANK OF PRODUCT SALES ALL TIME
 
 SELECT p.productname,
     ROUND(SUM(od.quantity * od.unitprice), 2) AS totalsales,
@@ -32,7 +32,7 @@ FROM order_details od
 INNER JOIN products p ON od.productid = p.productid
 GROUP BY p.productname
 
---  Retrieve the company name and the number of orders for all customers who have at 
+--  3. Retrieve the company name and the number of orders for all customers who have at 
 -- least 3 orders with a discount greater than or equal to 20%.
 
 SELECT *
@@ -48,7 +48,7 @@ ORDER BY c.companyname ASC
 WHERE numoforders >= 3
 ORDER BY numoforders DESC, CompanyName ASC
 
--- Retrieve the product name and the number of months ordered in for products that 
+-- 4. Retrieve the product name and the number of months ordered in for products that 
 -- were ordered in less than 6 unique months within the year.
 
 SELECT *
@@ -64,7 +64,7 @@ GROUP BY p.productname
 WHERE NumMonths < 6
 ORDER BY NumMonths ASC, ProductName ASC
 
--- Create a report that ranks the all-time sales for products based on the first letter 
+-- 5. Create a report that ranks the all-time sales for products based on the first letter 
 -- they start with. Include letters that don't have a product starting with them, and 
 -- rank them last. Additionally, group all products starting with characters other than 
 -- letters as the letter 'OTHER'.
@@ -81,7 +81,7 @@ RIGHT JOIN letters l ON p.letterid = l.letterid
 GROUP BY FirstLetter
 ORDER BY SalesRank ASC, FirstLetter ASC
 
--- Retrieve the product ID, product name, and the average quantity per order 
+-- 6. Retrieve the product ID, product name, and the average quantity per order 
 -- (rounded down to the nearest whole number) for all products. 
 -- Sort the results from the highest quantity to the lowest quantity.
 
@@ -94,7 +94,7 @@ INNER JOIN products p ON od.productid = p.productid
 GROUP BY p.productid, p.productname
 ORDER BY FLOOR(AVG(od.quantity)) DESC, p.productid ASC
 
--- Retrieve the month/year (as a single field), total number of orders, and total 
+-- 7. Retrieve the month/year (as a single field), total number of orders, and total 
 -- freight for each month between 1997 and 1998, where the total number of orders is 
 -- greater than 35. Sort the results by total freight in descending order.
 
@@ -112,7 +112,7 @@ FROM subq
 WHERE numorders > 35
 ORDER BY totalfreight DESC
 
--- The Pricing Team requires a list of products that experienced a unit price increase outside 
+-- 8. The Pricing Team requires a list of products that experienced a unit price increase outside 
 -- the range of 20% to 30%. They need the following information for each product: product name, 
 -- current unit price (rounded to 2 decimals), previous unit price (rounded to 2 decimals), and 
 -- the percentage increase calculated as: (New Number - Original Number) ÷ Original Number × 100 
@@ -151,7 +151,7 @@ AND ROUND(100 * (subq.currentprice - subq.previousprice) / subq.previousprice) N
 ORDER BY
 percentageincrease ASC
 
--- Retrieve a list containing the category name, price category (categorized as below $20, 
+-- 9. Retrieve a list containing the category name, price category (categorized as below $20, 
 -- between $20 and $50, or above $50), total sales in dollars (rounded to the nearest whole number), 
 -- and total number of orders for each category. Format the total sales as an integer. 
 -- Order the results by category name in ascending order, and within each category, 
@@ -172,7 +172,7 @@ INNER JOIN order_details od ON p.productid = od.productid
 GROUP BY c.categoryname, price_category
 ORDER BY category_name ASC, price_category ASC
 
--- Retrieve a list containing the category name, region category (categorized as North America, 
+-- 10. Retrieve a list containing the category name, region category (categorized as North America, 
 -- Asia-Pacific, or Europe), total units in stock by region, and total units on order by region. 
 -- Order the results by region category in ascending order, and within each region, 
 -- by category name in ascending order.
@@ -201,7 +201,7 @@ INNER JOIN products p ON c.categoryid = p.categoryid
 GROUP BY category_name, region_category
 ORDER BY region_category ASC, category_name ASC
 
--- Retrieve a list containing the category name, product name, unit price, category average 
+-- 11. Retrieve a list containing the category name, product name, unit price, category average 
 -- unit price, category median unit price, unit price against category average rank (below, 
 -- equal, or above average), and unit price against category median rank (below, equal, or 
 -- above average). The products should not be discontinued. 
@@ -246,7 +246,7 @@ INNER JOIN med_prices med ON c.categoryname = med.categoryname
 WHERE p.discontinued = 0
 ORDER BY c.categoryname ASC, p.productname ASC
 
--- For all employees, list: full name (one field), job title, total sales amount (excluding 
+-- 12. For all employees, list: full name (one field), job title, total sales amount (excluding 
 -- discount)($), total number of orders, total number of entries (1 entry = 1 row in an order),
 -- average amount ($) per order, average amount ($) per entry, total discount amount ($), total 
 -- sales amount (including discount) ($), total discount percentage. Requirements/Conditions: round 
@@ -282,7 +282,7 @@ GROUP BY e.employeeid, es.totaldiscountamount, es.totalsalesnodiscount
 ORDER BY totalsaleswithdiscount DESC;
 
 
--- List of companies who placed fewer orders in 1997 than they did in 1996, 
+-- 13. List of companies who placed fewer orders in 1997 than they did in 1996, 
 -- and how many orders they placed in each of those years:
 
 WITH order_counts AS (
@@ -299,7 +299,7 @@ FROM order_counts
 WHERE numorders1996 > numorders1997;
 
 
--- What month has had most sales across each year (include total sales amount)?
+-- 14. What month has had most sales across each year (include total sales amount)?
 
 SELECT
 	EXTRACT(YEAR FROM o.orderdate) AS "Year",
@@ -310,3 +310,134 @@ INNER JOIN orders o ON od.orderid = o.orderid
 GROUP BY EXTRACT(YEAR FROM o.orderdate), TO_CHAR(o.orderdate, 'Month')
 ORDER BY RANK() OVER (PARTITION BY EXTRACT(YEAR FROM o.orderdate) ORDER BY SUM(od.quantity * od.unitprice) DESC)
 LIMIT 3;
+
+-- 15. Find the top 5 customers who have made the highest total purchases 
+-- (based on sales amount) across all years.
+
+SELECT c.customerid, c.companyname, ROUND(SUM(od.quantity * od.unitprice), 2) AS total_purchases
+FROM customers c
+JOIN orders o ON c.customerid = o.customerid
+JOIN order_details od ON o.orderid = od.orderid
+GROUP BY c.customerid, c.companyname
+ORDER BY total_purchases DESC
+LIMIT 5;
+
+
+-- 16. Determine the average time (in days) taken to ship orders for each employee, 
+-- considering only orders shipped within the same calendar year they were placed.
+
+SELECT o.employeeid, AVG(DATE_PART('day', o.shippeddate - o.orderdate)) AS avg_ship_time
+FROM orders o
+WHERE DATE_PART('year', o.orderdate) = DATE_PART('year', o.shippeddate)
+GROUP BY o.employeeid;
+
+-- 17. Identify the top 3 countries with the highest average order values 
+-- (total sales amount divided by the number of orders) for the year 1998.
+
+SELECT c.country, AVG(od.quantity * od.unitprice) AS avg_order_value
+FROM customers c
+JOIN orders o ON c.customerid = o.customerid
+JOIN order_details od ON o.orderid = od.orderid
+WHERE DATE_PART('year', o.orderdate) = 1998
+GROUP BY c.country
+ORDER BY avg_order_value DESC
+LIMIT 3;
+
+--18. List the products that have experienced a significant increase in unit price 
+-- (more than 50%) compared to the average unit price of their category.
+
+SELECT p.productid, p.productname, p.unitprice, c.avg_unit_price
+FROM products p
+JOIN (
+    SELECT categoryid, AVG(unitprice) AS avg_unit_price
+    FROM products
+    GROUP BY categoryid
+) c ON p.categoryid = c.categoryid
+WHERE p.unitprice > 1.5 * c.avg_unit_price;
+
+-- 19. Find the customers who have placed orders every month without any gaps in 
+-- the years 1996, 1997, and 1998.
+
+SELECT c.customerid, c.companyname
+FROM customers c
+WHERE NOT EXISTS (
+    SELECT DISTINCT DATE_TRUNC('month', o.orderdate) AS order_month
+    FROM orders o
+    WHERE o.customerid = c.customerid
+    AND DATE_PART('year', o.orderdate) IN (1996, 1997, 1998)
+    EXCEPT
+    SELECT DISTINCT DATE_TRUNC('month', o.orderdate) AS order_month
+    FROM orders o
+    WHERE o.customerid = c.customerid
+    AND DATE_PART('year', o.orderdate) IN (1996, 1997, 1998)
+);
+
+-- 20. Identify the top 5 suppliers who have shipped the highest total quantity 
+-- of products across all orders.
+
+SELECT s.supplierid, s.companyname, SUM(od.quantity) AS total_quantity
+FROM suppliers s
+JOIN products p ON s.supplierid = p.supplierid
+JOIN order_details od ON p.productid = od.productid
+GROUP BY s.supplierid, s.companyname
+ORDER BY total_quantity DESC
+LIMIT 5;
+
+-- 21. Determine the employee(s) who have the highest number of customers assigned to them, 
+-- considering only the active employees.
+
+SELECT e.employeeid, e.firstname, e.lastname, COUNT(c.customerid) AS num_customers
+FROM employees e
+JOIN customers c ON e.employeeid = c.supportrepid
+WHERE e.isactive = 1
+GROUP BY e.employeeid, e.firstname, e.lastname
+HAVING COUNT(c.customerid) = (
+    SELECT COUNT(customerid)
+    FROM customers
+    WHERE supportrepid = e.employeeid
+    GROUP BY supportrepid
+    ORDER BY COUNT(customerid) DESC
+    LIMIT 1
+);
+
+-- 22. List the products that have been out of stock for the longest duration, sorted by the 
+-- number of days they have been out of stock.
+
+SELECT p.productid, p.productname, MAX(DATEDIFF(day, o.orderdate, o.shippeddate)) AS days_out_of_stock
+FROM products p
+JOIN order_details od ON p.productid = od.productid
+JOIN orders o ON od.orderid = o.orderid
+WHERE p.unitsinstock = 0
+GROUP BY p.productid, p.productname
+ORDER BY days_out_of_stock DESC;
+
+-- 23. Find the customers who have placed orders in the most number of different countries, 
+-- considering all years.
+
+SELECT c.customerid, c.companyname, COUNT(DISTINCT o.shipcountry) AS num_countries
+FROM customers c
+JOIN orders o ON c.customerid = o.customerid
+GROUP BY c.customerid, c.companyname
+ORDER BY num_countries DESC
+LIMIT 5;
+
+-- 24. Identify the top 3 sales categories (based on total sales amount) for each year 
+-- from 1996 to 2000, excluding the category "Beverages" in any year.
+
+WITH ranked_categories AS (
+    SELECT c.categoryname, DATE_PART('year', o.orderdate) AS order_year,
+           SUM(od.quantity * od.unitprice) AS total_sales,
+           ROW_NUMBER() OVER (PARTITION BY DATE_PART('year', o.orderdate) 
+                              ORDER BY SUM(od.quantity * od.unitprice) DESC) AS rn
+    FROM categories c
+    JOIN products p ON c.categoryid = p.categoryid
+    JOIN order_details od ON p.productid = od.productid
+    JOIN orders o ON od.orderid = o.orderid
+    WHERE c.categoryname <> 'Beverages'
+    AND DATE_PART('year', o.orderdate) BETWEEN 1996 AND 2000
+    GROUP BY c.categoryname, DATE_PART('year', o.orderdate)
+)
+SELECT categoryname, order_year, total_sales
+FROM ranked_categories
+WHERE rn <= 3
+ORDER BY order_year ASC, rn ASC;
