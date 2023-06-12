@@ -1,6 +1,6 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
-Welcome to the Python folder within the **Mastering Data Analytics: A Modern Approach** repository! This folder contains different subfolders, each serving a specific purpose in your journey to becoming proficient in SQL.
+Welcome to the Python folder within the **Mastering Data Analytics: A Modern Approach** repository! This folder contains different subfolders, each serving a specific purpose in your journey to becoming proficient in Python.
 
 ## Examples
 
