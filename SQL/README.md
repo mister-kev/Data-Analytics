@@ -14,11 +14,7 @@ In addition to the queries, the **Examples** folder also includes a **Database M
 
 ## Exercises
 
-The **Exercises** folder contains a set of SQL exercises carefully designed to enhance your SQL skills. These exercises cover a wide range of SQL topics and progressively increase in difficulty. They provide hands-on practice to reinforce your understanding of SQL concepts and improve your query writing abilities.
-
-## Solutions
-
-The **Solutions** folder complements the exercises in the **Exercises** folder. It contains the solutions to the SQL exercises, allowing you to compare your solutions and learn from different approaches. Studying the provided solutions will deepen your understanding of effective SQL coding practices and help you refine your problem-solving techniques.
+The **Exercises** folder contains a set of SQL exercises carefully designed to enhance your SQL skills. These exercises cover a wide range of SQL topics and progressively increase in difficulty. They provide hands-on practice to reinforce your understanding of SQL concepts and improve your query writing abilities. Studying the provided solutions will deepen your understanding of effective SQL coding practices and help you refine your problem-solving techniques.
 
 ## Resources
 
