@@ -14,6 +14,7 @@ Welcome to **Keven's** repository on Mastering Data Analytics: A Modern Approach
 
 # Table of Contents
 - [SQL](#sql)
+  - [Examples](#sql/examples)
   - [Exercises](#sqlexercises)
     - [Solutions](#sqlsolutions)  
   - [Additional Resources](#additionalsqlresources)
