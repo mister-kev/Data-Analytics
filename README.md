@@ -24,16 +24,21 @@ Welcome to **Keven's** repository on Mastering Data Analytics: A Modern Approach
 
 ## SQL
 
+In the SQL folder, you will find a range of exercises designed to help you sharpen your SQL skills. These exercises cover various topics and difficulty levels, allowing you to practice and enhance your understanding of SQL queries, data manipulation, and database management.
 
-# Contributing
+Additionally, I have compiled a set of PDF resources that delve into important SQL concepts, best practices, and advanced techniques. These resources are a valuable reference for both beginners and experienced users looking to deepen their knowledge.
 
-[(Back to top)](#table-of-contents)
+## PYTHON
 
-Your contributions are always welcome! Please have a look at the [contribution guidelines](CONTRIBUTING.md) first. :tada:
+Similar in structure, the Python folder contains exercises aimed at improving your proficiency in Python programming. These exercises cover different aspects of the language, including data manipulation, algorithms, and problem-solving. By completing these exercises, you can enhance your Python skills and gain confidence in writing efficient and effective Python code.
+
+I have included PDF resources that cover essential Python topics, such as syntax, data structures, and popular libraries. These resources serve as handy references to support your learning journey and provide further insights into Python development.
+
+I hope you find this repository helpful and enjoy exploring the exercises and resources provided. 
+Happy coding!
 
 # License
 
+The MIT License (MIT) 2023 - [Keven Meehan](https://github.com/mister-kev/). Please have a look at the [LICENSE](LICENSE.MD) for more details.
+
 [(Back to top)](#table-of-contents)
-
-
-The MIT License (MIT) 2017 - [Keven Meehan](https://github.com/mister-kev/). Please have a look at the [LICENSE.md](LICENSE.md) for more details.
