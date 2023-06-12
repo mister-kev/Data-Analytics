@@ -6,9 +6,9 @@ Welcome to the SQL folder within the **Mastering Data Analytics: A Modern Approa
 
 The **Examples** folder showcases practical SQL queries at various difficulty levels. It includes the following queries:
 
-- **Beginner Query**: This query introduces foundational SQL concepts and serves as a starting point for beginners.
-- **Advanced Query**: This query explores more complex SQL operations and challenges your problem-solving skills.
-- **Expert Query**: This query represents an advanced level query, involving intricate data manipulations and advanced SQL techniques.
+- **Beginner Understanding Queries**: This query introduces foundational SQL concepts and serves as a starting point for beginners.
+- **Advanced Understanding Queries**: This query explores more complex SQL operations and challenges your problem-solving skills.
+- **Expert Understanding Queries**: This query represents an advanced level query, involving intricate data manipulations and advanced SQL techniques.
 
 In addition to the queries, the **Examples** folder also includes a **Database Map PDF**. This PDF provides a visual representation of the database schema used in the queries, helping you understand the structure and relationships between tables.
 
